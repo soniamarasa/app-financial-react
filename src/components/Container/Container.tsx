@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import ProtectedRoute from '../../helpers/ProtectedRoute';
+
 import RedirectRoute from '../../helpers/RedirectRoute';
-import { useLocation } from 'react-router-dom';
 
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
@@ -26,22 +27,18 @@ import { ThemeContext } from '../../contexts/ThemeContext';
 export const Container = () => {
   const { theme } = React.useContext(ThemeContext) || {};
   const location = useLocation();
-  const rotes = ['/', '/account'];
+  const rotes = ['/auth', '/signup', 'reset'];
 
   return (
-    <main className={theme && rotes.includes(location.pathname) ? theme.theme : 'light'}>
+    <main
+      className={
+        theme && rotes.includes(location.pathname) ? 'light' : 'dark'
+      }
+    >
       <div className="container-root">
         <Header />
         <Routes>
-          <Route
-            path="/auth"
-            element={
-              <RedirectRoute>
-                {' '}
-                <Auth />
-              </RedirectRoute>
-            }
-          />
+          <Route path="/auth" element={<Auth />} />
           <Route
             path="/signup"
             element={
@@ -64,73 +61,73 @@ export const Container = () => {
           <Route
             path="/"
             element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
+              //<ProtectedRoute>
+              <Home />
+              //</ProtectedRoute>
             }
           />
           <Route
             path="/user"
             element={
-              <ProtectedRoute>
-                <User />
-              </ProtectedRoute>
+              //<ProtectedRoute>
+              <User />
+              //</ProtectedRoute>
             }
           />
           <Route
             path="/accounts"
             element={
-              <ProtectedRoute>
-                <Accounts />
-              </ProtectedRoute>
+              //<ProtectedRoute>
+              <Accounts />
+              //</ProtectedRoute>
             }
           />
           <Route
             path="/transactions"
             element={
-              <ProtectedRoute>
-                <Transactions />
-              </ProtectedRoute>
+              //<ProtectedRoute>
+              <Transactions />
+              //</ProtectedRoute>
             }
           />
           <Route
             path="/reports"
             element={
-              <ProtectedRoute>
-                <Reports />
-              </ProtectedRoute>
+              //<ProtectedRoute>
+              <Reports />
+              //</ProtectedRoute>
             }
           />
           <Route
             path="/categories"
             element={
-              <ProtectedRoute>
-                <Categories />
-              </ProtectedRoute>
+              //<ProtectedRoute>
+              <Categories />
+              //</ProtectedRoute>
             }
           />
           <Route
             path="/Tags"
             element={
-              <ProtectedRoute>
-                <Tags />
-              </ProtectedRoute>
+              //<ProtectedRoute>
+              <Tags />
+              //</ProtectedRoute>
             }
           />
           <Route
             path="/stores"
             element={
-              <ProtectedRoute>
-                <Stores />
-              </ProtectedRoute>
+              //<ProtectedRoute>
+              <Stores />
+              //</ProtectedRoute>
             }
           />
           <Route
             path="/cards"
             element={
-              <ProtectedRoute>
-                <Cards />
-              </ProtectedRoute>
+              //<ProtectedRoute>
+              <Cards />
+              //</ProtectedRoute>
             }
           />
         </Routes>

@@ -1,17 +1,17 @@
 @import '../node_modules/primeflex/primeflex.css';
 @import '../node_modules/primeflex/primeflex.min.css';
-// @import '../node_modules/primeflex/primeflex.scss';
+@import '../src/theme/theme.css';
 
 // VARIAVEIS
 $color-dark-primary: #292828;
 $color-dark-secondary: #333131;
 $color-font-dark: #fff;
-$color-light-primary: #292828;
-$color-light-secondary: #333131;
-$color-light-dark: #fff;
+$color-light-primary: var(--gray-100);
+$color-light-secondary: var(--gray-50);
+$color-font-light: var(--gray-800);
 $color-primary: #c18f41;
 $color-secondary: #659665;
-$color-tertiary: #de4e3b;
+$color-tertiary: #ee7863;
 $color-quaternary: #c18f41;
 
 * {
@@ -28,20 +28,196 @@ p {
   margin: 0.5rem;
 }
 
-.App {
-  background-color: $color-dark-primary;
-  color: $color-font-dark;
+a {
+  text-decoration: none;
+}
+
+.light,
+.dark {
   min-height: 100vh;
 }
 
+//THEMES
+
+//LIGHT
+.light {
+  background-color: $color-light-primary !important;
+  color: $color-font-light !important;
+
+  .header {
+    background-color: $color-light-secondary;
+  }
+
+  .p-card {
+    background-color: $color-light-secondary !important;
+    color: $color-font-light !important;
+  }
+
+  .p-sidebar-left .p-sidebar {
+    background-color: $color-light-secondary !important;
+    color: $color-font-light !important;
+  }
+
+  .p-menu {
+    background-color: $color-light-secondary !important;
+  }
+
+  .p-menu .p-menuitem-link {
+    & .p-menuitem-text,
+    .p-menuitem-icon {
+      color: $color-font-light !important;
+    }
+  }
+
+  .p-inputtext {
+    color: $color-font-light !important;
+  }
+
+  .p-tieredmenu.p-tieredmenu-overlay {
+    background-color: $color-light-secondary !important;
+    color: $color-font-light !important;
+  }
+
+  .p-tieredmenu .p-menuitem .p-menuitem-link .p-menuitem-text {
+    color: $color-font-light !important;
+  }
+}
+
+//DARK
+.dark {
+  background-color: $color-dark-primary !important;
+  color: $color-font-dark !important;
+  .header {
+    background-color: $color-dark-secondary;
+  }
+
+  .p-card {
+    background-color: $color-dark-secondary !important;
+    color: $color-font-dark !important;
+  }
+
+  .p-sidebar-left .p-sidebar {
+    background-color: $color-dark-secondary !important;
+    color: $color-font-dark !important;
+  }
+
+  .p-menu {
+    background-color: $color-dark-secondary !important;
+  }
+
+  .p-menu .p-menuitem-link {
+    & .p-menuitem-text,
+    .p-menuitem-icon {
+      color: $color-font-dark !important;
+    }
+  }
+
+  .p-inputtext {
+    color: $color-font-dark !important;
+  }
+
+  .p-tieredmenu.p-tieredmenu-overlay {
+    background-color: $color-dark-secondary !important;
+    color: $color-font-dark !important;
+  }
+
+  .p-tieredmenu .p-menuitem .p-menuitem-link .p-menuitem-text {
+    color: $color-font-dark !important;
+  }
+}
+
+//END THEME
+
+.logo-menu {
+  width: 4rem;
+}
+
 .header {
-  padding: 2rem;
-  background-color: $color-dark-secondary;
+  padding: 1rem;
   margin-bottom: 1rem;
 }
 
 .p-card {
-  background-color: $color-dark-secondary;
   border-radius: 0.5rem;
-  padding: 1rem;
+}
+
+.p-sidebar-left .p-sidebar {
+  width: max-content !important;
+  height: 100%;
+}
+
+.p-menu {
+  padding: 0 !important;
+  border: none !important;
+}
+
+.p-menu .p-menuitem-link {
+  &:hover {
+    .p-menuitem-text,
+    .p-menuitem-icon {
+      color: $color-tertiary !important;
+    }
+  }
+}
+
+.header-container .p-calendar-w-btn {
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  background: rgba(0, 0, 0, 0.08) !important;
+}
+
+.revenue-menu .p-menuitem-link .p-menuitem-icon {
+  color: var(--green-400) !important;
+}
+
+.expense-menu .p-menuitem-link .p-menuitem-icon {
+  color: var(--red-400) !important;
+}
+
+.transaction-menu .p-menuitem-link .p-menuitem-icon {
+  color: var(--blue-500) !important;
+}
+
+.card-menu .p-menuitem-link .p-menuitem-icon {
+  color: var(--teal-500) !important;
+}
+
+.icon-menu .p-menuitem-link .p-menuitem-icon {
+  color: var(--primary-500) !important;
+}
+
+.auth-container,
+.sign-up-container {
+  .p-inputtext {
+    margin: 0;
+    border-radius: 2rem;
+    background-color: #ffffff57 !important;
+    padding: 0.6rem !important;
+    border: 1px solid #fff;
+    width: 100%;
+
+    &:hover {
+      background-color: #ffffff36 !important;
+    }
+  }
+}
+
+.auth-container .p-inputtext {
+  width: 18rem;
+}
+
+.input-01 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    padding-left: 0.2rem;
+    font-weight: bold;
+  }
+
+  small {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 0.3rem;
+  }
 }

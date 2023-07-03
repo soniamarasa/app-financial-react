@@ -4,7 +4,7 @@ import './HeaderDashboard.scss'
 
 export default function HeaderDashboard(props: any) {
   return (
-    <div className="header-container grid">
+    <div className="header-dash-container grid">
       <CardDash></CardDash>
       <CardDash></CardDash>
       <CardDash></CardDash>

@@ -1,0 +1,31 @@
+.header {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.user-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  .user-data {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    & img {
+      max-width: 2.5rem;
+    }
+  }
+}
