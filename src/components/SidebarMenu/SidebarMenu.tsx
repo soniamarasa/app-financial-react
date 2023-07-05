@@ -9,14 +9,14 @@ export const SidebarMenu = () => {
   const [visibleLeft, setVisibleLeft] = useState(false);
 
   let items = [
-    { label: 'Contas', icon: 'pi pi-wallet' },
-    { label: 'Transações', icon: 'pi pi-list' },
-    { label: 'Cartões', icon: 'pi pi-credit-card' },
-    { label: 'Relatorios', icon: 'pi pi-chart-pie' },
-    { label: 'Planejamento', icon: 'pi pi-dollar' },
-    { label: 'Categorias', icon: 'pi pi-bookmark' },
-    { label: 'Tags', icon: 'pi pi-tags' },
-    { label: 'Lojas', icon: 'pi pi-shopping-cart' },
+    { label: 'Contas', icon: 'pi pi-wallet', url: '/accounts' },
+    { label: 'Transações', icon: 'pi pi-list', url: '/transactions' },
+    { label: 'Cartões', icon: 'pi pi-credit-card', url: '/cards' },
+    { label: 'Relatorios', icon: 'pi pi-chart-pie', url: '/reports' },
+    { label: 'Planejamento', icon: 'pi pi-dollar', url: '/plan' },
+    { label: 'Categorias', icon: 'pi pi-bookmark' , url: '/categories'},
+    { label: 'Tags', icon: 'pi pi-tags', url: '/tags' },
+    { label: 'Lojas', icon: 'pi pi-shopping-cart', url: '/stores' },
   ];
 
   return (

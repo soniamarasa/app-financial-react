@@ -124,6 +124,12 @@ a {
   .p-tieredmenu .p-menuitem .p-menuitem-link .p-menuitem-text {
     color: $color-font-dark !important;
   }
+
+  .p-dialog-header,
+  .p-dialog-content {
+    background-color: $color-dark-secondary !important;
+    color: $color-font-dark !important;
+  }
 }
 
 //END THEME
@@ -186,7 +192,15 @@ a {
 }
 
 .auth-container,
-.sign-up-container {
+.sign-up-container,
+.new-password-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  min-height: calc(100vh - 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
   .p-inputtext {
     margin: 0;
     border-radius: 2rem;
@@ -220,4 +234,25 @@ a {
     justify-content: flex-end;
     padding-right: 0.3rem;
   }
+}
+
+.sign-up-container .p-dropdown,
+.sign-up-container .p-calendar-w-btn {
+  margin: 0;
+  border-radius: 2rem;
+  background-color: #ffffff57 !important;
+  border: 1px solid #fff;
+  width: 100%;
+
+  & .p-inputtext {
+    background: transparent !important;
+  }
+
+  & .p-datepicker-trigger.p-button {
+    border-radius: 0 2rem 2rem 0;
+  }
+}
+
+.p-toast-message-content {
+  align-items: center !important;
 }

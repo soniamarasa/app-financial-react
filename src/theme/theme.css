@@ -8258,11 +8258,11 @@
   color: rgba(0, 0, 0, 0.6);
 }
 .p-calendar-w-btn .p-datepicker-trigger.p-button:enabled:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: var(--primary-color);
 }
 .p-calendar-w-btn .p-datepicker-trigger.p-button:enabled:active,
 .p-calendar-w-btn .p-datepicker-trigger.p-button:focus {
-  background: rgba(0, 0, 0, 0.12);
+  background: var(--primary-600);
 }
 .p-calendar-w-btn .p-datepicker-trigger.p-button:disabled {
   background-color: rgba(0, 0, 0, 0) !important;

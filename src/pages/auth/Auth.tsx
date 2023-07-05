@@ -1,16 +1,41 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
 import './Auth.scss';
 import ImgAuth from '../../assets/svg-auth.svg';
 import Logo from '../../assets/icon.png';
-import { useNavigate } from 'react-router-dom';
+import { login } from '../../services/user-api';
+import { setLocalStorage } from '../../helpers/LocalStorage';
+import { RecoveryDialog } from '../../components/Dialogs/RecoveryDialog';
 
 export const Auth = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [dialogVisible, setDialogVisible] = useState(false);
+
+  const handleSubmit = async () => {
+    const user = { email, password };
+
+    const response = await login(user);
+
+    if (response?.status === 200) {
+      let auth = {
+        isAuthenticated: true,
+        user: response.data.user,
+      };
+
+      setLocalStorage('auth', auth);
+      setLocalStorage('userId', auth.user.id);
+
+      setTimeout(() => {
+        navigate('/');
+      }, 1000);
+    }
+  };
+
   return (
     <div className="grid auth-container">
       <div className="img-auth-container col-12  md:col-5 lg:col-6">
@@ -18,8 +43,6 @@ export const Auth = () => {
       </div>
       <div className="login-container col-12  md:col-7 lg:col-6">
         <div className="login">
-          {/* 
-        <img src={Logo} alt="" /> */}
           <h2> LOGIN </h2>
 
           <div className="card input-01">
@@ -42,13 +65,18 @@ export const Auth = () => {
               }
               feedback={false}
             />
-            <small>
-              <a href="">Esqueci a minha senha</a>
+            <small onClick={() => setDialogVisible(true)}>
+              Esqueci a minha senha
             </small>
           </div>
 
           <div>
-            <Button rounded label="Entrar" />
+            <Button
+              disabled={!password || !email}
+              onClick={() => handleSubmit()}
+              rounded
+              label="Entrar"
+            />
           </div>
         </div>
 
@@ -57,6 +85,8 @@ export const Auth = () => {
           <a onClick={() => navigate('/signup')}>Cadastre-se</a>
         </div>
       </div>
+
+      <RecoveryDialog visible={dialogVisible} onHide={setDialogVisible} />
     </div>
   );
 };

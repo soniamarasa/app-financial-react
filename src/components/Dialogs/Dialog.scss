@@ -1,0 +1,24 @@
+.recovery-dialog {
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0 0 1rem;
+  }
+  .p-inputtext {
+    margin: 0;
+    border-radius: 2rem;
+    background-color: #00000010 !important;
+    padding: 0.6rem !important;
+    border: 1px solid #9d9d9d;
+    width: 100%;
+
+    &:hover {
+      background-color: #00000020 !important;
+    }
+  }
+}
+
+.p-dialog .p-dialog-footer {
+  padding: 0 !important;
+}
