@@ -122,6 +122,7 @@ export const Categories = () => {
       </div>{' '}
       {!loading && categories && categories.length > 0 && (
         <DataTable
+          emptyMessage="Nenhuma categoria encontrada."
           paginator
           paginatorDropdownAppendTo="self"
           rows={5}
@@ -146,7 +147,6 @@ export const Categories = () => {
           ></Column>
         </DataTable>
       )}
-      {!loading && !categories.length && <p> Nenhuma Categoria cadastrada!</p>}
       {loading && <Loading />}
       <CategoryDialog
         visible={dialogVisible}

@@ -9,14 +9,14 @@ export const SidebarMenu = () => {
   const [visibleLeft, setVisibleLeft] = useState(false);
 
   let items = [
-    { label: 'Contas', icon: 'pi pi-wallet', url: '/accounts' },
-    { label: 'Transações', icon: 'pi pi-list', url: '/transactions' },
-    { label: 'Cartões', icon: 'pi pi-credit-card', url: '/cards' },
-    { label: 'Relatorios', icon: 'pi pi-chart-pie', url: '/reports' },
-    { label: 'Planejamento', icon: 'pi pi-dollar', url: '/plan' },
-    { label: 'Categorias', icon: 'pi pi-bookmark' , url: '/categories'},
-    { label: 'Tags', icon: 'pi pi-tags', url: '/tags' },
-    { label: 'Lojas', icon: 'pi pi-shopping-cart', url: '/stores' },
+    { label: 'Contas', icon: 'fa-solid fa-building-columns', url: '/accounts' },
+    { label: 'Transações', icon: 'fa-solid fa-list', url: '/transactions' },
+    { label: 'Cartões', icon: 'fa-solid fa-credit-card', url: '/cards' },
+    { label: 'Relatorios', icon: 'fa-solid fa-chart-pie', url: '/reports' },
+    { label: 'Planejamento', icon: 'fa-solid fa-dollar', url: '/plan' },
+    { label: 'Categorias', icon: 'fa-solid fa-bookmark' , url: '/categories'},
+    { label: 'Tags', icon: 'fa-solid fa-tags', url: '/tags' },
+    { label: 'Lojas', icon: 'fa-solid fa-store', url: '/stores' },
   ];
 
   return (

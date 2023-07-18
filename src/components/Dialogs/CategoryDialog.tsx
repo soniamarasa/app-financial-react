@@ -90,13 +90,13 @@ export function CategoryDialog(props: Props) {
 
   return (
     <Dialog
-      header={props.category ? 'Editar categoria' : 'Nova categoria'}
+      header={props.category?._id ? 'Editar categoria' : 'Nova categoria'}
       visible={props.visible}
       style={{ width: '350px' }}
       onHide={() => props.onHide(false)}
       appendTo="self"
     >
-      <div className="card input-01">
+      <div className="card div-field">
         <label>Nome</label>
         <InputText
           value={name}

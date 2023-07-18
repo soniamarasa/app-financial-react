@@ -1,10 +1,14 @@
 export interface IAccount {
   _id?: string;
-  userId: string;
+  userId?: string;
   name: string;
   currentBalance: number;
-  expectedBalance: number;
-  icon: string;
+  expectedBalance?: number;
   color: string;
-  type: number;
+  type: ITypeAccount;
+}
+
+export interface ITypeAccount {
+  icon: string;
+  name: string;
 }

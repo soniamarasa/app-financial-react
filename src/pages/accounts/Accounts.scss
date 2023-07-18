@@ -1,0 +1,28 @@
+.account-container {
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem 1rem;
+
+  & .actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  & .account-body {
+    width: 100%;
+    .grid {
+      gap: 1rem;
+      // width: 100%;
+    }
+  }
+
+  & .info-accounts {
+    .p-card {
+      width: 100%;
+    }
+  }
+}

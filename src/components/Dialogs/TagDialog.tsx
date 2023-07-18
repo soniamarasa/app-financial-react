@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
@@ -35,7 +35,6 @@ export function TagDialog(props: Props) {
             color,
           });
 
-          console.log(response)
     if (response?.status === 200) {
       if (props.tag && Object.keys(props.tag).length) {
         setTags((old: ITag[]) => {
@@ -59,16 +58,26 @@ export function TagDialog(props: Props) {
     }
   };
 
+  const setProps = React.useCallback((tag?: ITag) => {
+    setName(tag ? tag.name : '');
+    setColor(tag ? tag.color : 'EE7863');
+  }, []);
+
+  useEffect(() => {
+    if (props.tag && Object.keys(props.tag).length) setProps(props.tag);
+    else setProps();
+  }, [props.tag, setProps]);
+
   return (
     <Dialog
-      header={props.tag ? 'Editar tag' : 'Nova tag'}
+      header={props.tag?._id ? 'Editar tag' : 'Nova tag'}
       visible={props.visible}
       style={{ width: '400px' }}
       onHide={() => props.onHide(false)}
       appendTo="self"
     >
       <div className="tag-inputs div-fields">
-        <div className="div-field input-01">
+        <div className="div-field">
           <label>Nome</label>
           <InputText
             value={name}

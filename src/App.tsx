@@ -10,6 +10,9 @@ import './theme/theme.scss'; // theme
 import 'primereact/resources/primereact.css'; // core css
 import 'primeicons/primeicons.css'; // icons
 import { CategoryStorage } from './contexts/CategoryContext';
+import { TagStorage } from './contexts/TagContext';
+import { StoreStorage } from './contexts/StoreContext';
+import { AccountStorage } from './contexts/AccountContext';
 // import 'primeflex/primeflex.css';
 
 function App() {
@@ -18,12 +21,17 @@ function App() {
       <BrowserRouter>
         <ThemeStorage>
           <TransactionStorage>
-            <CategoryStorage>
-              
-              <ToastContextProvider>
-                <Container />
-              </ToastContextProvider>
-            </CategoryStorage>
+            <AccountStorage>
+              <StoreStorage>
+                <CategoryStorage>
+                  <TagStorage>
+                    <ToastContextProvider>
+                      <Container />
+                    </ToastContextProvider>
+                  </TagStorage>
+                </CategoryStorage>
+              </StoreStorage>
+            </AccountStorage>
           </TransactionStorage>
         </ThemeStorage>
       </BrowserRouter>

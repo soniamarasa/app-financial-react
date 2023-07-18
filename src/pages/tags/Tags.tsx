@@ -4,7 +4,7 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 
 import { getTags } from '../../services/tags-api';
-import { TagContext, TagStorage } from '../../contexts/TagContext';
+import { TagContext } from '../../contexts/TagContext';
 import { ITag } from '../../interfaces/ITag';
 
 import { TagDialog } from '../../components/Dialogs/TagDialog';
@@ -47,7 +47,7 @@ export const Tags = () => {
     );
   };
 
-  const loadTags = React.useCallback(() => {
+  useEffect(() => {
     setLoading(true);
     getTags().then(({ data }) => {
       setLoading(false);
@@ -55,49 +55,42 @@ export const Tags = () => {
     });
   }, [setTags]);
 
-  useEffect(() => {
-    loadTags();
-  }, [loadTags]);
-
   return (
-    <TagStorage>
-      <div className="container-pages tag-container">
-        <div className="actions">
-          <h2> Tags</h2>
+    <div className="container-pages tag-container">
+      <div className="actions">
+        <h2><i className="fa-solid fa-tag"></i> Tags</h2>
 
-          <Button
-            icon="pi pi-plus"
-            rounded
-            aria-label="Nova Tag"
-            tooltip="Nova Tag"
-            onClick={() => {
-              setCurrentTag({} as ITag);
-              setDialogVisible(true);
-            }}
-          />
-        </div>{' '}
-        {!loading && (
-          <DataTable
-            emptyMessage="Nenhuma tag encontrada."
-            paginator
-            paginatorDropdownAppendTo="self"
-            rows={5}
-            rowsPerPageOptions={[5, 10, 20, 40]}
-            value={tags}
-          >
-            <Column sortable field="name" header="Nome"></Column>
-            <Column filterField="color" body={colorTag} header="Cor"></Column>
-            <Column header="Ações" filterField="tag" body={actionsTag}></Column>
-          </DataTable>
-        )}
-        {/* {!loading && !tags.length && <p> Nenhuma tag cadastrada!</p>} */}
-        {loading && <Loading />}
-        <TagDialog
-          visible={dialogVisible}
-          onHide={setDialogVisible}
-          tag={currentTag}
+        <Button
+          icon="pi pi-plus"
+          rounded
+          aria-label="Nova Tag"
+          tooltip="Nova Tag"
+          onClick={() => {
+            setCurrentTag({} as ITag);
+            setDialogVisible(true);
+          }}
         />
-      </div>
-    </TagStorage>
+      </div>{' '}
+      {!loading && (
+        <DataTable
+          emptyMessage="Nenhuma tag encontrada."
+          paginator
+          paginatorDropdownAppendTo="self"
+          rows={5}
+          rowsPerPageOptions={[5, 10, 20, 40]}
+          value={tags}
+        >
+          <Column sortable field="name" header="Nome"></Column>
+          <Column filterField="color" body={colorTag} header="Cor"></Column>
+          <Column header="Ações" filterField="tag" body={actionsTag}></Column>
+        </DataTable>
+      )}
+      {loading && <Loading />}
+      <TagDialog
+        visible={dialogVisible}
+        onHide={setDialogVisible}
+        tag={currentTag}
+      />
+    </div>
   );
 };

@@ -29,7 +29,13 @@ export const Container = () => {
 
   return (
     <main
-      className={theme && (rotes.includes(location.pathname) || location.pathname.includes('/password-reset')) ? 'light' : 'dark'}
+      className={
+        theme &&
+        (rotes.includes(location.pathname) ||
+          location.pathname.includes('/password-reset'))
+          ? 'light'
+          : 'dark'
+      }
     >
       <div className="container-root">
         <Header />

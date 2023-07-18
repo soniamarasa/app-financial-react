@@ -1,0 +1,23 @@
+.store-container {
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 2rem;
+  
+    & .actions {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+  
+    & .color-store {
+      width: 1.5rem !important;
+      height: 1.5rem !important;
+      border-radius: 50%;
+    }
+  
+    & .actions-store {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+  
