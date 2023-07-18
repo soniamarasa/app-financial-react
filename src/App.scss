@@ -1,6 +1,6 @@
 @import '../node_modules/primeflex/primeflex.css';
 @import '../node_modules/primeflex/primeflex.min.css';
-@import '../src/theme/theme.css';
+@import '../src/theme/theme.scss';
 
 // VARIAVEIS
 $color-dark-primary: #292828;
@@ -12,7 +12,7 @@ $color-font-light: var(--gray-800);
 $color-primary: #c18f41;
 $color-secondary: #659665;
 $color-tertiary: #ee7863;
-$color-quaternary: #c18f41;
+$color-quaternary: #3f3f3f;
 
 * {
   -webkit-box-sizing: border-box;
@@ -108,7 +108,7 @@ a {
   .p-menu .p-menuitem-link {
     & .p-menuitem-text,
     .p-menuitem-icon {
-      color: $color-font-dark !important;
+      color: $color-font-dark;
     }
   }
 
@@ -130,9 +130,70 @@ a {
     background-color: $color-dark-secondary !important;
     color: $color-font-dark !important;
   }
+
+  .p-datatable .p-datatable-tbody > tr {
+    background-color: $color-dark-secondary !important;
+    color: $color-font-dark !important;
+  }
+
+  .p-datatable .p-datatable-thead > tr > th {
+    background-color: $color-quaternary !important;
+    color: var(--primary-color);
+  }
+
+  .p-dropdown .p-inputtext,
+  .p-dropdown .p-dropdown-trigger {
+    background: $color-dark-secondary !important;
+    border-radius: 0 !important;
+
+    //barra estilizar
+  }
+
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    color: $color-font-dark;
+    background: $color-dark-secondary;
+  }
 }
 
 //END THEME
+.p-datatable-header {
+  border-radius: 1rem !important;
+}
+
+.p-datatable .p-paginator-bottom {
+  margin-top: 4rem;
+}
+
+.p-dropdown {
+  border: none !important;
+}
+
+.p-datatable {
+  position: relative;
+  width: 100%;
+
+  & .p-datatable-thead > tr > th {
+    &:first-child {
+      border-radius: 1rem 0 0 0;
+    }
+    &:last-child {
+      border-radius: 0 1rem 0 0;
+    }
+  }
+}
+
+.p-datatable .p-datatable-tbody tr:last-child td:last-child {
+  border-radius: 0 0 1rem 0 ;
+}
+
+.p-datatable .p-datatable-tbody tr:last-child td:first-child {
+  border-radius: 0 0 0 1rem;
+}
+
+.p-datatable .p-datatable-tbody .p-datatable-emptymessage:last-child td:first-child {
+  border-radius: 0 0 1rem 1rem;
+  
+}
 
 .logo-menu {
   width: 4rem;
@@ -171,15 +232,15 @@ a {
   background: rgba(0, 0, 0, 0.08) !important;
 }
 
-.revenue-menu .p-menuitem-link .p-menuitem-icon {
+.revenue-menu .p-menuitem-icon {
   color: var(--green-400) !important;
 }
 
-.expense-menu .p-menuitem-link .p-menuitem-icon {
+.expense-menu .p-menuitem-icon {
   color: var(--red-400) !important;
 }
 
-.transaction-menu .p-menuitem-link .p-menuitem-icon {
+.transaction-menu .p-menuitem-icon {
   color: var(--blue-500) !important;
 }
 
@@ -193,7 +254,8 @@ a {
 
 .auth-container,
 .sign-up-container,
-.new-password-container {
+.new-password-container,
+.container-pages {
   max-width: 1280px;
   margin: 0 auto;
   min-height: calc(100vh - 3rem);
@@ -201,7 +263,7 @@ a {
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  .p-inputtext {
+  .input-01 .p-inputtext {
     margin: 0;
     border-radius: 2rem;
     background-color: #ffffff57 !important;
@@ -255,4 +317,33 @@ a {
 
 .p-toast-message-content {
   align-items: center !important;
+}
+
+.info-container {
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+.p-overlaypanel-content {
+  background-color: $color-dark-secondary !important;
+
+  .icons-container {
+    div {
+      background-color: #0000009c;
+      color: #fff;
+
+      &:hover {
+        background-color: #000000;
+        color: #ee7863;
+      }
+    }
+  }
+}
+
+.btn-expense .p-button {
+  background: var(--red-400) !important;
+}
+
+.btn-revenue .p-button {
+  background: var(--green-400) !important;
 }

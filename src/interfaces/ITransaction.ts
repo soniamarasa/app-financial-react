@@ -4,7 +4,7 @@ import { IStore } from "./IStore";
 import { IAccount } from "./IAccount";
 
 export interface ITransaction {
-    id?: string;
+    _id?: string;
     userId: string;
     description: string;
     obs: string;

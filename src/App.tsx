@@ -6,9 +6,10 @@ import { Container } from './components/Container/Container';
 import { TransactionStorage } from './contexts/TransactionContext';
 import { ToastContextProvider } from './contexts/ToastContext';
 
-import './theme/theme.css'; // theme
+import './theme/theme.scss'; // theme
 import 'primereact/resources/primereact.css'; // core css
 import 'primeicons/primeicons.css'; // icons
+import { CategoryStorage } from './contexts/CategoryContext';
 // import 'primeflex/primeflex.css';
 
 function App() {
@@ -17,9 +18,12 @@ function App() {
       <BrowserRouter>
         <ThemeStorage>
           <TransactionStorage>
-            <ToastContextProvider>
-              <Container />
-            </ToastContextProvider>
+            <CategoryStorage>
+              
+              <ToastContextProvider>
+                <Container />
+              </ToastContextProvider>
+            </CategoryStorage>
           </TransactionStorage>
         </ThemeStorage>
       </BrowserRouter>
