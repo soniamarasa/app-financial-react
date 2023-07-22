@@ -13,6 +13,7 @@ import { CategoryStorage } from './contexts/CategoryContext';
 import { TagStorage } from './contexts/TagContext';
 import { StoreStorage } from './contexts/StoreContext';
 import { AccountStorage } from './contexts/AccountContext';
+import { ReportsStorage } from './contexts/ReportContext';
 // import 'primeflex/primeflex.css';
 
 function App() {
@@ -25,9 +26,11 @@ function App() {
               <StoreStorage>
                 <CategoryStorage>
                   <TagStorage>
-                    <ToastContextProvider>
-                      <Container />
-                    </ToastContextProvider>
+                    <ReportsStorage>
+                      <ToastContextProvider>
+                        <Container />
+                      </ToastContextProvider>{' '}
+                    </ReportsStorage>
                   </TagStorage>
                 </CategoryStorage>
               </StoreStorage>

@@ -2,8 +2,9 @@ export interface IAccount {
   _id?: string;
   userId?: string;
   name: string;
+  openingBalance?: number;
   currentBalance: number;
-  expectedBalance?: number;
+  forecastBalance: number;
   color: string;
   type: ITypeAccount;
 }

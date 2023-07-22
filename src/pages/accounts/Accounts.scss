@@ -14,15 +14,57 @@
 
   & .account-body {
     width: 100%;
-    .grid {
+  }
+
+  h2 {
+    display: flex;
+    gap: 1rem;
+    margin: 0 0 0.8rem 0.5rem;
+    justify-content: space-between;
+    align-items: center;
+
+    span {
+      display: flex;
       gap: 1rem;
-      // width: 100%;
     }
   }
 
+  .p-splitbutton .p-splitbutton-defaultbutton {
+    display: none !important;
+  }
+
+  .p-splitbutton.p-button-text > .p-button {
+    border-radius: 50%;
+    height: 2.5rem;
+    width: 2.5rem;
+    align-items: flex-end;
+  }
+
+  .balance-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
   & .info-accounts {
-    .p-card {
-      width: 100%;
+  }
+
+  .account-card {
+    .p-card-content {
+      padding: 0.5rem 0 0 !important;
+    }
+
+    .p-divider.p-divider-horizontal {
+      margin: 1rem 0 0;
+      padding: 0;
+    }
+
+    .p-card-footer {
+      display: flex;
+      justify-content: flex-end;
+
+      .p-button {
+        border-radius: 2rem;
+      }
     }
   }
 }

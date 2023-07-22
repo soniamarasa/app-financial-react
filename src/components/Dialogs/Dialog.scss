@@ -22,7 +22,7 @@
 .p-dialog .p-dialog-footer {
   padding: 0 !important;
   background-color: transparent !important;
-  margin-top: 1.5rem;
+  margin-top: 1.0rem;
 }
 
 .input-color {
@@ -77,4 +77,24 @@
   gap: 0.5rem !important;
   display: flex;
   flex-direction: column;
+}
+
+.account-form {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  
+  .input-color {
+    flex-direction: column !important;
+    font-weight: lighter;
+    align-items: flex-start;
+    justify-content: center;
+  }
+}
+
+.select-type {
+  display: flex;
+  gap: 1rem !important;
+  align-items: center;
+  margin-left: 0.5rem !important;
 }

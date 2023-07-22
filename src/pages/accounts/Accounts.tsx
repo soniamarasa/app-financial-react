@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from 'primereact/button';
 
 import { getAccounts } from '../../services/accounts-api';
@@ -9,9 +9,16 @@ import { AccountDialog } from '../../components/Dialogs/AccountDialog';
 import Loading from '../../components/Loading/Loading';
 import './Accounts.scss';
 import { Card } from 'primereact/card';
+import { AccountCard } from './AccountCard/AccountCard';
+
+import { formatNumber } from '../../helpers/formatNumber';
+import { ReportsContext } from '../../contexts/ReportContext';
+import { getReports } from '../../services/reports-api';
+import { IReport, IReports } from '../../interfaces/IReports';
 
 export const Accounts = () => {
   const { accounts, setAccounts } = React.useContext(AccountContext);
+  const { reports, setReports } = React.useContext(ReportsContext);
   const [currentAccount, setCurrentAccount] = useState({} as IAccount);
   const [dialogVisible, setDialogVisible] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -24,8 +31,23 @@ export const Accounts = () => {
     });
   }, [setAccounts]);
 
+  useEffect(() => {
+    getReports().then(({ data }) => {
+      console.log(data);
+      setReports(data);
+    });
+  }, [setReports]);
+
+  const reportsFiltered = useMemo(() => {
+    return Object.keys(reports).filter(
+      (report: string) =>
+        reports[report as keyof IReports]._id === 1 ||
+        reports[report as keyof IReports]._id === 4
+    );
+  }, [reports]);
+
   return (
-    <div className="container-pages account-container">
+    <div id="account" className="container-pages account-container">
       <div className="actions">
         <h2>
           <i className="fa-solid fa-account"></i> Contas{' '}
@@ -42,24 +64,36 @@ export const Accounts = () => {
           }}
         />
       </div>{' '}
-      {!loading && accounts.length && (
-        <div className="account-body grid">
-          <div className="col-12 md:col-8 grid ">
-            {accounts.map((account, index) => (
-              <Card
-                className="col-12 md:col-6 lg:col-3"
-                onClick={() => console.log('oi')}
-                key={index}
-              >
-                <h2>
-                  {' '}
-                  <i className={account.type.icon}></i> {account.name}
+      {!!accounts.length && !loading && (
+        <div className="grid account-body ">
+          <div className="col-12 md:col-8">
+            <div className="grid">
+              {accounts.map((account, index) => (
+                <div key={index} className="col-12 md:col-6">
+                  <AccountCard
+                    accountData={account}
+                    index={index}
+                  ></AccountCard>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="col-12 md:col-4 info-accounts">
+            {reportsFiltered.map((report: string, index: number) => (
+              <Card key={index}>
+                <h4>{reports[report as keyof IReports].name}</h4>
+                <h2
+                  className={
+                    reports[report as keyof IReports].total >= 0
+                      ? 'pos-balance'
+                      : 'neg-balance'
+                  }
+                >
+                  {formatNumber(reports[report as keyof IReports].total)}
                 </h2>
               </Card>
-            ))}
-          </div>
-          <div className="col-12 md:col-4 grid info-accounts">
-            <Card></Card>
+            ))}{' '}
           </div>
         </div>
       )}

@@ -26,7 +26,7 @@ export const Categories = () => {
       icon: 'pi pi-angle-double-down',
       command: () => {
         setType(1);
-        getCategories(1).then(({ data }) => setCategories(data));
+        loadCategories(1);
       },
     },
     {

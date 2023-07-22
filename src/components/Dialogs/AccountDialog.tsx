@@ -30,6 +30,7 @@ export function AccountDialog(props: Props) {
   const defaultValues = {
     name: '',
     currentBalance: 0,
+    forecastBalance: 0,
     color: 'EE7863',
     type: { name: 'Conta corrente', icon: 'fa-solid fa-building-columns' },
   };
@@ -71,6 +72,8 @@ export function AccountDialog(props: Props) {
           })
         : await newAccount({
             ...data,
+            openingBalance: data.currentBalance,
+            forecastBalance: data.currentBalance
           });
 
     if (response?.status === 200) {
@@ -98,6 +101,19 @@ export function AccountDialog(props: Props) {
 
   const setProps = React.useCallback((account?: IAccount) => {}, []);
 
+  const typeTemplate = (option: any, props?: any) => {
+    if (option) {
+      return (
+        <div className="select-type">
+          <i className={option.icon}></i>
+          <span>{option.name}</span>
+        </div>
+      );
+    }
+
+    return <span>{props.placeholder}</span>;
+  };
+
   useEffect(() => {
     if (props.account && Object.keys(props.account).length)
       setProps(props.account);
@@ -106,7 +122,6 @@ export function AccountDialog(props: Props) {
 
   return (
     <Dialog
-
       header={props.account?._id ? 'Editar conta' : 'Nova conta'}
       visible={props.visible}
       style={{ width: '400px' }}
@@ -141,7 +156,7 @@ export function AccountDialog(props: Props) {
           </div>
         </div>
         <div className="grid">
-          <div className="div-field col-12 sm:col-8">
+          <div className="div-field col-12 sm:col-10">
             <label
               htmlFor="currentBalance"
               className={classNames({ 'p-error': errors.currentBalance })}
@@ -169,7 +184,7 @@ export function AccountDialog(props: Props) {
             />
             {getFormErrorMessage('currentBalance')}
           </div>
-          <div className="input-color col-12 sm:col-4">
+          <div className="input-color col-12 sm:col-2">
             <label
               htmlFor="color"
               className={classNames({ 'p-error': errors.color })}
@@ -194,10 +209,10 @@ export function AccountDialog(props: Props) {
           </div>
         </div>
 
-        <div className="grid">
+        <div className="grid ">
           <div className="div-field col-12">
             <label
-              htmlFor="gender"
+              htmlFor="type"
               className={classNames({ 'p-error': errors.type })}
             >
               Tipo
@@ -209,10 +224,12 @@ export function AccountDialog(props: Props) {
               rules={{ required: required }}
               render={({ field, fieldState }) => (
                 <Dropdown
-                appendTo={null}
+                  appendTo={document.getElementById('account')}
                   id={field.name}
                   value={field?.value}
                   options={accountTypes}
+                  valueTemplate={typeTemplate}
+                  itemTemplate={typeTemplate}
                   optionLabel="name"
                   placeholder="Selecione..."
                   className={classNames({ 'p-invalid': fieldState.invalid })}
@@ -224,7 +241,7 @@ export function AccountDialog(props: Props) {
           </div>
         </div>
 
-        <div className='p-dialog-footer'>
+        <div className="p-dialog-footer">
           <Button type="submit" rounded label="Salvar" />
         </div>
       </form>
