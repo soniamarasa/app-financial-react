@@ -113,7 +113,12 @@ a {
   }
 
   .p-inputtext {
+    background-color: #454545cc;
+    border: none;
+    border-radius: 2rem;
+    padding: 0.6rem !important;
     color: $color-font-dark !important;
+    width: 100%;
   }
 
   .p-tieredmenu.p-tieredmenu-overlay {
@@ -141,17 +146,32 @@ a {
     color: var(--primary-color);
   }
 
-  .p-dropdown .p-inputtext,
-  .p-dropdown .p-dropdown-trigger {
-    background: $color-dark-secondary !important;
-    border-radius: 0 !important;
+  .p-divider.p-divider-horizontal {
 
-    //barra estilizar
+  }
+  
+  .p-dropdown .p-inputtext {
+    border-radius: 0 !important;
+    background-color: transparent !important;
+  }
+
+  .p-dropdown {
+    background: #454545cc !important;
+    border-radius: 2rem !important;
+  }
+
+  .p-dropdown .p-dropdown-trigger {
+    background: transparent !important;
+    border-radius: 0 1rem 1rem 0 !important;
   }
 
   .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
     color: $color-font-dark;
     background: $color-dark-secondary;
+  }
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    color: $color-font-dark ;
+    background: $color-dark-secondary ;
   }
 }
 
@@ -183,16 +203,18 @@ a {
 }
 
 .p-datatable .p-datatable-tbody tr:last-child td:last-child {
-  border-radius: 0 0 1rem 0 ;
+  border-radius: 0 0 1rem 0;
 }
 
 .p-datatable .p-datatable-tbody tr:last-child td:first-child {
   border-radius: 0 0 0 1rem;
 }
 
-.p-datatable .p-datatable-tbody .p-datatable-emptymessage:last-child td:first-child {
+.p-datatable
+  .p-datatable-tbody
+  .p-datatable-emptymessage:last-child
+  td:first-child {
   border-radius: 0 0 1rem 1rem;
-  
 }
 
 .logo-menu {
@@ -232,11 +254,11 @@ a {
   background: rgba(0, 0, 0, 0.08) !important;
 }
 
-.revenue-menu .p-menuitem-icon {
+.revenue-menu .p-menuitem-icon, .pos-balance  {
   color: var(--green-400) !important;
 }
 
-.expense-menu .p-menuitem-icon {
+.expense-menu .p-menuitem-icon, .neg-balance  {
   color: var(--red-400) !important;
 }
 

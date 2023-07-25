@@ -46,6 +46,14 @@
   }
 
   & .info-accounts {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-end;
+
+    .p-card {
+      width: 100%;
+    }
   }
 
   .account-card {

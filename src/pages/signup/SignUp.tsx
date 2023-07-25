@@ -14,6 +14,7 @@ import { IUser } from '../../interfaces/IUser';
 
 import { createAccount } from '../../services/user-api';
 import { useToastContext } from '../../contexts/ToastContext';
+import { genders } from '../../utils/valueTypes';
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -79,11 +80,6 @@ export const SignUp = () => {
       )
     );
   };
-
-  const genders = [
-    { name: 'Feminino', value: 'female' },
-    { name: 'Masculino', value: 'male' },
-  ];
 
   return (
     <div className="grid sign-up-container">

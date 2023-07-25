@@ -1,42 +1,39 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from 'primereact/button';
+import { Card } from 'primereact/card';
 
-import { getAccounts } from '../../services/accounts-api';
-import { AccountContext } from '../../contexts/AccountContext';
-import { IAccount } from '../../interfaces/IAccount';
-
+import { AccountCard } from './AccountCard/AccountCard';
 import { AccountDialog } from '../../components/Dialogs/AccountDialog';
 import Loading from '../../components/Loading/Loading';
-import './Accounts.scss';
-import { Card } from 'primereact/card';
-import { AccountCard } from './AccountCard/AccountCard';
-
-import { formatNumber } from '../../helpers/formatNumber';
 import { ReportsContext } from '../../contexts/ReportContext';
+import { AccountContext } from '../../contexts/AccountContext';
 import { getReports } from '../../services/reports-api';
-import { IReport, IReports } from '../../interfaces/IReports';
+import { getAccounts } from '../../services/accounts-api';
+import { IReports } from '../../interfaces/IReports';
+import { formatNumber } from '../../helpers/formatNumber';
+import './Accounts.scss';
 
 export const Accounts = () => {
   const { accounts, setAccounts } = React.useContext(AccountContext);
   const { reports, setReports } = React.useContext(ReportsContext);
-  const [currentAccount, setCurrentAccount] = useState({} as IAccount);
   const [dialogVisible, setDialogVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const loadReports = React.useCallback(() => {
+    console.log('oi')
+    getReports().then(({ data }) => {
+      setReports(data);
+    });
+  }, [setReports]);
 
   useEffect(() => {
     setLoading(true);
     getAccounts().then(({ data }) => {
-      setLoading(false);
       setAccounts(data);
+      loadReports();
+      setLoading(false);
     });
-  }, [setAccounts]);
-
-  useEffect(() => {
-    getReports().then(({ data }) => {
-      console.log(data);
-      setReports(data);
-    });
-  }, [setReports]);
+  }, [setAccounts, loadReports]);
 
   const reportsFiltered = useMemo(() => {
     return Object.keys(reports).filter(
@@ -59,27 +56,23 @@ export const Accounts = () => {
           aria-label="Nova Loja"
           tooltip="Nova Loja"
           onClick={() => {
-            setCurrentAccount({} as IAccount);
             setDialogVisible(true);
           }}
         />
       </div>{' '}
       {!!accounts.length && !loading && (
         <div className="grid account-body ">
-          <div className="col-12 md:col-8">
+          <div className="col-12 md:col-7 lg:col-9">
             <div className="grid">
               {accounts.map((account, index) => (
-                <div key={index} className="col-12 md:col-6">
-                  <AccountCard
-                    accountData={account}
-                    index={index}
-                  ></AccountCard>
+                <div key={index} className="col-12 lg:col-6">
+                  <AccountCard loadReports={loadReports} accountData={account}></AccountCard>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="col-12 md:col-4 info-accounts">
+          <div className="col-12 md:col-5 lg:col-3 info-accounts">
             {reportsFiltered.map((report: string, index: number) => (
               <Card key={index}>
                 <h4>{reports[report as keyof IReports].name}</h4>
@@ -100,9 +93,9 @@ export const Accounts = () => {
       {!loading && !accounts.length && <p> Nenhuma conta cadastrada!</p>}
       {loading && <Loading />}
       <AccountDialog
+        loadReports={loadReports}
         visible={dialogVisible}
         onHide={setDialogVisible}
-        account={currentAccount}
       />
     </div>
   );

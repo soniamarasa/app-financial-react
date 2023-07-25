@@ -13,16 +13,16 @@ import { useToastContext } from '../../contexts/ToastContext';
 import { newAccount, updateAccount } from '../../services/accounts-api';
 import { IAccount } from '../../interfaces/IAccount';
 import { AccountContext } from '../../contexts/AccountContext';
-import { ThemeContext } from '../../contexts/ThemeContext';
+import { accountsTypes } from '../../utils/valueTypes';
 
 export interface Props {
   visible: boolean;
   onHide: any;
   account?: IAccount;
+  loadReports: () => void;
 }
 
 export function AccountDialog(props: Props) {
-  const { theme } = React.useContext(ThemeContext) || {};
   const { showToast } = useToastContext();
   const { setAccounts } = React.useContext(AccountContext);
 
@@ -42,6 +42,7 @@ export function AccountDialog(props: Props) {
     formState: { errors },
     handleSubmit,
     reset,
+    setValue,
   } = useForm({ defaultValues });
 
   const getFormErrorMessage = (name: any) => {
@@ -54,14 +55,6 @@ export function AccountDialog(props: Props) {
     );
   };
 
-  const accountTypes = [
-    { name: 'Conta corrente', icon: 'fa-solid fa-building-columns' },
-    { name: 'Poupança', icon: 'fa-solid fa-sack-dollar' },
-    { name: 'Dinheiro', icon: 'fa-solid fa-money-bill' },
-    { name: 'Investimento', icon: 'fa-solid fa-arrow-trend-up' },
-    { name: 'Outros', icon: 'fa-solid fa-ellipsis' },
-  ];
-
   const onSubmit = async (data: IAccount) => {
     setFormData(data);
     const response =
@@ -73,7 +66,7 @@ export function AccountDialog(props: Props) {
         : await newAccount({
             ...data,
             openingBalance: data.currentBalance,
-            forecastBalance: data.currentBalance
+            forecastBalance: data.currentBalance,
           });
 
     if (response?.status === 200) {
@@ -94,12 +87,24 @@ export function AccountDialog(props: Props) {
       }
       showToast('success', response.data.message);
       props.onHide(false);
+      props.loadReports();
     } else {
       showToast('error', response.data.message);
     }
   };
 
-  const setProps = React.useCallback((account?: IAccount) => {}, []);
+  const setProps = React.useCallback((account?: IAccount) => {
+    setValue('name', account ? account.name : '');
+    setValue('currentBalance', account ? account.currentBalance : 0);
+    setValue('forecastBalance', account ? account.forecastBalance : 0);
+    setValue('color', account ? account.color : 'EE7863');
+    setValue(
+      'type',
+      account
+        ? account.type
+        : { name: 'Conta corrente', icon: 'fa-solid fa-building-columns' }
+    );
+  }, []);
 
   const typeTemplate = (option: any, props?: any) => {
     if (option) {
@@ -115,9 +120,11 @@ export function AccountDialog(props: Props) {
   };
 
   useEffect(() => {
-    if (props.account && Object.keys(props.account).length)
+    if (props.account && Object.keys(props.account).length) {
       setProps(props.account);
-    else setProps();
+    } else {
+      setProps();
+    }
   }, [props.account, setProps]);
 
   return (
@@ -227,7 +234,7 @@ export function AccountDialog(props: Props) {
                   appendTo={document.getElementById('account')}
                   id={field.name}
                   value={field?.value}
-                  options={accountTypes}
+                  options={accountsTypes}
                   valueTemplate={typeTemplate}
                   itemTemplate={typeTemplate}
                   optionLabel="name"

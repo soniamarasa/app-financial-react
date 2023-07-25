@@ -42,9 +42,9 @@ api.interceptors.response.use(
   }
 );
 
-export const getAccounts = (type?: number) => {
+export const getAccounts = () => {
   return api
-    .get(`accounts${type ? `?type=${type}` : ''}`)
+    .get(`accounts`)
     .then((response) => response)
     .catch((err) => err);
 };

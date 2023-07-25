@@ -5,17 +5,17 @@ import { IAccount } from "./IAccount";
 
 export interface ITransaction {
     _id?: string;
-    userId: string;
+    userId?: string;
     description: string;
-    obs: string;
+    obs?: string;
     type: string;
     value: number;
     date: Date;
     effected: boolean;
-    category: ICategory;
-    store: IStore;
-    tag: ITag;
-    inputAccount: IAccount;
-    outputAccount: IAccount;
+    category?: ICategory;
+    store?: IStore;
+    tag?: ITag;
+    inputAccount?: IAccount;
+    outputAccount?: IAccount;
   }
   
